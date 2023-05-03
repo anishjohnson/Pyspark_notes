@@ -1,4 +1,4 @@
-#### RDD(Resilient Distributed Datasets):
+RDD(Resilient Distributed Datasets):
 ====================================
 RDDs are like the foundation of everything. 
 
@@ -7,19 +7,17 @@ on a whole bunch of machines at the same time. One thing that's really neat abou
 super stable - like, they don't change, which means they can be spread out across the cluster without 
 worrying about any errors or crashes. It's kind of like a safety net for your data.
 
-
-
-<b>RDD Workflow:</b>
+RDD Workflow:
 =============
 Example:
 rdd1 = load file from datalake (hdfs/ cloud storage)  |----> Nothing happens when we execute this		]
-rdd2 = rdd1.map										  |----> Nothing happens when we execute this		|----> These are transformations.		
-rdd3 = rdd2.filter									  |----> Nothing happens when we execute this		]
-rdd3.collect()										  |----> All the above processes will happen		]----> This is an action.
+rdd2 = rdd1.map										                    |----> Nothing happens when we execute this		|----> These are transformations.		
+rdd3 = rdd2.filter									                  |----> Nothing happens when we execute this		|
+rdd3.collect()										                    |----> All the above processes will happen		]----> This is an action.
 
 But what are these transformations and actions that we saw above?
 
-<b>These are 2 kinds of operations in Spark:</b>
+These are 2 kinds of operations in Spark:
 -----------------------------------------
 1. Transformations: These are lazy and will only execute when actions are performed.
 2. Actions: When a action is called all the transformations get executed one by one.
