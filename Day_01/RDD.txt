@@ -1,0 +1,54 @@
+#### RDD(Resilient Distributed Datasets):
+====================================
+RDDs are like the foundation of everything. 
+
+They're basically these cool things that let you represent a big chunk of data that can be processed 
+on a whole bunch of machines at the same time. One thing that's really neat about RDDs is that they're
+super stable - like, they don't change, which means they can be spread out across the cluster without 
+worrying about any errors or crashes. It's kind of like a safety net for your data.
+
+
+
+<b>RDD Workflow:</b>
+=============
+Example:
+rdd1 = load file from datalake (hdfs/ cloud storage)  |----> Nothing happens when we execute this		]
+rdd2 = rdd1.map										  |----> Nothing happens when we execute this		|----> These are transformations.		
+rdd3 = rdd2.filter									  |----> Nothing happens when we execute this		]
+rdd3.collect()										  |----> All the above processes will happen		]----> This is an action.
+
+But what are these transformations and actions that we saw above?
+
+<b>These are 2 kinds of operations in Spark:</b>
+-----------------------------------------
+1. Transformations: These are lazy and will only execute when actions are performed.
+2. Actions: When a action is called all the transformations get executed one by one.
+
++-------------------------------------------------------------------------+
+| Data --> Create RDD --> Transform RDD --> Save RDD --> Transformed Data |
++-------------------------------------------------------------------------+
+
+Create RDD:
+-----------
+- Define a data source      
+- Split data into partitions
+- Distribute partitions across the cluster 
+
+Transform RDD:
+--------------
+- Apply transformations to each partition in parallel           
+- Operations include:                                            
+- Map: Apply a function to each element in the RDD
+- Filter: Filter elements in the RDD based on a condition
+- Reduce: Aggregate the elements in the RDD
+- Join: Combine two RDDs based on a common key
+- GroupBy: Group elements in the RDD by a key etc.
+- Resulting RDD is a new, transformed RDD 
+
+Save RDD:
+---------
+- Save the transformed RDD to a storage system, such as: 
+- Hadoop Distributed File System (HDFS) 
+- Amazon S3 
+- Apache Cassandra etc. 
+- The saved RDD can be reused in subsequent processing steps
